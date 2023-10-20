@@ -1,0 +1,42 @@
+{
+	"name": "treblle-sdk-docs",
+	"version": "0.0.1",
+	"description": "A documentation for treblle express sdk",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yourusername/api-simplified-blog.git"
+	},
+	"author": "Emmanuel Ajike",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/yourusername/api-simplified-blog/issues"
+	},
+	"homepage": "https://github.com/shuding/nextra-docs-template#readme",
+	"dependencies": {
+		"next": "latest",
+		"nextra": "latest",
+		"nextra-theme-docs": "latest",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "18.11.10",
+		"typescript": "^4.9.3"
+	},
+	"keywords": [
+		"API",
+		"programming",
+		"SDKs",
+		"web development",
+		"developer",
+		"tutorials"
+	],
+	"engines": {
+		"node": ">=14.0.0"
+	}
+}
