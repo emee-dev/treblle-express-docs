@@ -3,20 +3,20 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 
 //  npx browserslist@latest --update-db
 const config: DocsThemeConfig = {
-	logo: <span>API SIMPLIFIED 🚀</span>,
+	logo: <span>Treblle Express 🚀</span>,
 	project: {
-		link: "https://github.com/emee_dev/nextra-docs-template",
+		link: "https://github.com/emee-dev/treblle_express",
 	},
 	chat: {
 		link: "https://discord.com",
 	},
-	docsRepositoryBase: "https://github.com/shuding/nextra-docs-template",
+	docsRepositoryBase: "https://github.com/emee-dev/treblle-express-docs",
 	footer: {
 		text: (
 			<span>
 				MIT {new Date().getFullYear()} ©{" "}
 				<a href="/" target="_blank">
-					API SIMPLIFIED 🚀
+					Treblle Express 🚀
 				</a>
 				.
 			</span>
