@@ -5,12 +5,12 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 const config: DocsThemeConfig = {
 	logo: <span>Treblle Express 🚀</span>,
 	project: {
-		link: "https://github.com/emee-dev/treblle_express",
+		link: "https://github.com/emee-dev/treblle-monorepo/tree/main/apps/sdk",
 	},
 	chat: {
 		link: "https://discord.com",
 	},
-	docsRepositoryBase: "https://github.com/emee-dev/treblle-express-docs",
+	docsRepositoryBase: "https://github.com/emee-dev/treblle-monorepo",
 	footer: {
 		text: (
 			<span>
