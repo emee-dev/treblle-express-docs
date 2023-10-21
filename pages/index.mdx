@@ -17,12 +17,23 @@ Thank you for choosing Treblle Express for monitoring API best practices and ins
 - An existing Express.js application.
 
 ## Installation
-
+<! ---
 Install Treblle Express using pnpm:
 
 ```bash
 pnpm install treblle-express
 ```
+-->
+
+git clone https://github.com/emee-dev/treblle-monorepo
+cd treblle-monorepo
+
+## Install project dependencies
+pnpm install
+
+## Add your env files and let turbo initialize the dev server
+TREBLLE_API_KEY='' TREBLLE_PROJECT_ID='' turbo run dev --filter sample
+
 
 ## Integration Steps
 
