@@ -2,7 +2,7 @@
 title: Introduction to Treblle 🚀
 description: How to start using treblle express in your express server
 author: Emmanuel Ajike
-date: October 19, 2023
+date: November 01, 2023
 ---
 
 # Treblle Express Integration Documentation
@@ -18,16 +18,10 @@ Thank you for choosing Treblle Express for monitoring API best practices and ins
 
 ## Installation
 
+Install Treblle Express using pnpm:
+
 ```bash
-git clone https://github.com/emee-dev/treblle-monorepo
-cd treblle-monorepo
-
-## Install project dependencies
-pnpm install
-
-## Add your env files and let turbo initialize the dev server
-TREBLLE_API_KEY='' TREBLLE_PROJECT_ID='' turbo run dev --filter sample
-
+pnpm install treblle-express
 ```
 
 ## Integration Steps
@@ -37,11 +31,11 @@ TREBLLE_API_KEY='' TREBLLE_PROJECT_ID='' turbo run dev --filter sample
 Ensure you have the required dependencies installed:
 
 ```javascript
-import express from "express";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import { TreblleExpress } from "treblle-express";
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { TreblleExpress } from 'treblle-express';
 ```
 
 ### 2. Create Express App
@@ -58,46 +52,61 @@ Set up necessary middleware for your Express app:
 
 ```javascript
 app.use(cors());
-app.options("*", cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 ```
 
-### 4. Import Routes
+### 4. Using Express Router
 
 Include your application routes. Adjust the path accordingly:
 
 ```javascript
-import router from "./router/index.ts";
-app.use(router);
+import express from 'express';
+const router = express.Router();
+
+const Treblle = new TreblleExpress(router, {
+  apiKey: process.env.TREBLLE_API_KEY,
+  projectId: process.env.TREBLLE_PROJECT_ID,
+})
+  .config({
+    environment: 'development', // Possible values: "production", "development", "testing"
+    // debugEndpoints: ['https://webhook.site/your-webhook-id'],
+    maskValues: ['email', 'name'],
+    logError: true,
+  })
+  .listen();
 ```
 
-### 5. Initialize TreblleExpress
+### 5. Using Express app
 
-#### 5.1 Create a .env file and add the following 
+#### 5.1 Create a .env file add the following:
 
-**Note:** The `TREBLLE_API_KEY` and `TREBLLE_PROJECT_ID` are required and an error will be thrown if unspecified
+The TREBLLE_API_KEY and TREBLLE_PROJECT_ID are required and an error will be thrown if unspecified
 
 ```bash
 TREBLLE_API_KEY=
 TREBLLE_PROJECT_ID=
 ```
 
-Create an instance of TreblleExpress, passing your Express app and configuration options:
+Create an instance of TreblleExpress, passing your Express app object and configuration options:
 
 ```javascript
+import express from 'express';
+const app = express();
+
 const Treblle = new TreblleExpress(app, {
-	apiKey: process.env.TREBLLE_API_KEY,
-	projectId: process.env.TREBLLE_PROJECT_ID,
+  apiKey: process.env.TREBLLE_API_KEY,
+  projectId: process.env.TREBLLE_PROJECT_ID,
 })
-	.config({
-		environment: "development", // Possible values: "production", "development", "testing"
-		// debugEndpoints: ['https://webhook.site/your-webhook-id'],
-		maskValues: ["email", "name"],
-		logError: true,
-	})
-	.listen();
+  .config({
+    environment: 'development', // Possible values: "production", "development", "testing"
+    // debugEndpoints: ['https://webhook.site/your-webhook-id'],
+    maskValues: ['email', 'name'],
+    logError: true,
+  })
+  .listen();
 ```
 
 Note: All values in the configuration are optional, and default values will be used if not provided.
@@ -108,6 +117,8 @@ Note: All values in the configuration are optional, and default values will be u
 - `logError`: Set to `true` to log errors.
 
 **Note:** The `listen` method must be called to start monitoring. Ensure that you include this method in your integration as shown in the example:
+
+**Note:** Calling the `listen`, `config` methods multiple times will not affect the logging.
 
 ### 6. Error Handling
 
@@ -122,11 +133,11 @@ Insert the error handler middleware into your Express application, typically aft
 
 // Use the Treblle Express error handler
 app.get(
-	"/",
-	Trebble.errorHandler(async (req: Request, res: Response) => {
-		// route handling here
-		res.send({ status: "This is the base endpoint", password: "sammy" });
-	})
+  '/',
+  Trebble.errorHandler(async (req: Request, res: Response) => {
+    // route handling here
+    res.send({ status: 'This is the base endpoint', password: 'sammy' });
+  }),
 );
 ```
 
